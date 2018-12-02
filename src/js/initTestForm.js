@@ -130,7 +130,7 @@ mapLandMeteotrek.prototype.initTestForm = function() {
 				if(w2ui.hasOwnProperty('sensors_grid') && w2ui['sensors_grid'].getSelection().length !== 0) sens1 = w2ui['sensors_grid'].getSelection();
 				
 				var sendData = '&sid=' + sid + dates + datef + '&sens1=' + sens1;
-
+				
 				that.meteotrekGetData('dataget_20', sendData)
 					.then((res) => {
 						if(res[0] == null) {
@@ -165,21 +165,25 @@ mapLandMeteotrek.prototype.initTestForm = function() {
 			if($(date).val() === '') {
 				return 'last';
 			} else {
-				return $(date).val() + initTime(time);
+				return $(date).val() + initTime(time, index);
 			}
 		} else {
 			if($(date).val() === '') {
 				var now = new Date();
 				// для сервера вожливо щоб к-ть днів була в форматі 01 ~ 31 тому додаємо перевірку для днів меньших 10
-				return (String(now.getDate()).length === 1 ? '0'+now.getDate() : now.getDate())+'.'+(now.getMonth()+1)+'.'+now.getFullYear() + initTime(time);
+				return addZero(now.getDate())+'.'+addZero(now.getMonth()+1)+'.'+now.getFullYear() + initTime(time);
 			} else {
 				return $(date).val() + initTime(time);
 			}
 		}
 
-		function initTime(time) {
+		function initTime(time, index) {
 			var item = $(time).val();
 			if(item === '') {
+				if(index !== 0) {
+					var now = new Date();
+					return ' '+addZero(now.getHours())+':'+addZero(now.getMinutes())+':00';
+				}
 				return ' 00:00:00';
 			} else {
 				var t = item.split(':');
@@ -189,7 +193,14 @@ mapLandMeteotrek.prototype.initTestForm = function() {
 					return ' ' + item + ':00';
 				}
 			}
-		}
+		};
+
+		function addZero(i) {
+			if (i < 10) {
+				i = "0" + i;
+			}
+			return i;
+		};
 	};
 
 	// ініціалізуємо таблицю з доступними сенсорами
