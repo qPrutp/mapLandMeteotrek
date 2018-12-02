@@ -170,7 +170,8 @@ mapLandMeteotrek.prototype.initTestForm = function() {
 		} else {
 			if($(date).val() === '') {
 				var now = new Date();
-				return now.getDate()+'.'+(now.getMonth()+1)+'.'+now.getFullYear() + initTime(time);
+				// для сервера вожливо щоб к-ть днів була в форматі 01 ~ 31 тому додаємо перевірку для днів меньших 10
+				return (String(now.getDate()).length === 1 ? '0'+now.getDate() : now.getDate())+'.'+(now.getMonth()+1)+'.'+now.getFullYear() + initTime(time);
 			} else {
 				return $(date).val() + initTime(time);
 			}
