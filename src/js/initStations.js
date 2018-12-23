@@ -13,7 +13,6 @@ mapLandMeteotrek.prototype.initStations = function() {
 			$('#mts_main-content').removeClass('d-flex_column');
 		}
 	}
-	console.log('initStations: ',that.stationsGet);
 
 	$('#mts_main-content').w2grid({
 		name: 'stations_grid',
@@ -33,7 +32,7 @@ mapLandMeteotrek.prototype.initStations = function() {
 		onExpand: function (event) {
 			showSensorsSlider(event);			
 		},
-		onClick: function (event) {
+		onDblClick: function (event) {
 			// перевірка який таб активний, якщо той що ми нажали ретурн
 			var tab = '';
 			if (w2ui.hasOwnProperty('info_tabs')) {
@@ -45,7 +44,6 @@ mapLandMeteotrek.prototype.initStations = function() {
 			showInfSensors(event);
 		},
 		onReload: function(event) {
-			console.log(event);
 			w2ui['stations_grid'].clear();
 			that.meteotrekGetData('stationsget_20')
 				.then(function(res) {
@@ -78,7 +76,6 @@ mapLandMeteotrek.prototype.initStations = function() {
 	};
 
 	function showInfSensors(event, infoList) {
-		console.log(event);
 		// перевіряємо чи сторінка сформована
 		if(!$('#info_sensors_block').length) {
 			// формуємо головне вікно з заголовком, блоком для табів та блоком для гріда який потрібно показувати
@@ -112,13 +109,14 @@ mapLandMeteotrek.prototype.initStations = function() {
 
 		// знаходимо потрібний нам об'єкт з даними 
 		var data = findSensors(that.stationsGet, event.recid);
-		console.log(data);
 
 		// перевіряємо чи сформований блок для табів
 		if (w2ui.hasOwnProperty('info_tabs')) {
+
 			// перевіряємо чи таб створено
 			addTab(data);
 			// w2ui['info_tabs'].scroll('right');
+
 		} else {
 			// створюємо табс
 			$('#info_sensors_tabs').w2tabs({
@@ -128,7 +126,6 @@ mapLandMeteotrek.prototype.initStations = function() {
 					{ id: 'info_tab'+data[0].ID, text: data[0].StationName, closable: true }
 				],
 				onClose: function(event) {
-					console.log(event);
 					if(w2ui.hasOwnProperty('grid_info_tab')) $().w2destroy('grid_info_tab');
 					if(w2ui['info_tabs'].tabs.length === 1) {
 						$().w2destroy('info_tabs');
@@ -159,6 +156,11 @@ mapLandMeteotrek.prototype.initStations = function() {
 			w2ui['info_tabs'].refresh();
 			if(w2ui.hasOwnProperty('grid_info_tab')) $().w2destroy('grid_info_tab');
 			renderGrid(data);
+
+			// якщо к-ть табів переищує 3 ми видаляємо таб з 0 індексом в масиві w2ui.info_tabs.tabs
+			if (w2ui.info_tabs.tabs.length > 3) {
+				w2ui.info_tabs.remove(w2ui.info_tabs.tabs[0].id);
+			}
 		};
 		function findSensors(arr, id) {
 			return arr.filter(function(item, i, arr) {

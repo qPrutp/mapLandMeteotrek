@@ -113,7 +113,6 @@ mapLandMeteotrek.prototype.initPane = function() {
 			{ id: 'testForm', text: this.locale['For period'] }
 		],
 		onClick: function(event) {
-			console.log(event.target);
 			switch(event.target) {
 				case 'stationsget':
 					if (w2ui.hasOwnProperty('stations_grid')) { break; }
@@ -128,7 +127,6 @@ mapLandMeteotrek.prototype.initPane = function() {
 					// 		that.initStations();
 					// 	});
 					that.initStations();									// локальні дані
-					console.log('stationsget is clicked');
 					break;
 				case 'sensorslibget':
 					if (w2ui.hasOwnProperty('description_grid')) { break; }
@@ -136,7 +134,6 @@ mapLandMeteotrek.prototype.initPane = function() {
 					$().w2destroy('stations_grid');
 					$().w2destroy('mts_form'); $('#test_form').remove();						//тест форма
 					that.initDescription();
-					console.log('sensorslibget is clicked');
 					break;
 				case 'testForm':
 					if (w2ui.hasOwnProperty('mts_form') && $('#test_form').length) { break; }
@@ -150,7 +147,6 @@ mapLandMeteotrek.prototype.initPane = function() {
 					// 	})
 					// 	.then(() => that.initTestForm());
 					that.initTestForm();
-					console.log('testForm is clicked');
 					break;
 				default:
 					w2alert('Шеф, все пропало!');

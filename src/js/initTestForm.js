@@ -13,7 +13,6 @@ mapLandMeteotrek.prototype.initTestForm = function() {
 			$('#mts_main-content').removeClass('d-flex_column');
 		}
 	}
-	console.log('initTestForm: ',that.stationsGet);
 
 	// формуємо максимальну дату для датапікера
 	var now = new Date();
