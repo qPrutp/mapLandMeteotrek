@@ -117,8 +117,10 @@ mapLandMeteotrek.prototype.initPane = function() {
 				case 'stationsget':
 					if (w2ui.hasOwnProperty('stations_grid')) { break; }
 
+					// видаляємо слухач resize щоб пізніше добавити новий для зміни розміру w2ui блоку
+					$('#mts').unbind('resize');
  					$().w2destroy('description_grid');
- 					$().w2destroy('mts_form'); $('#test_form').remove();						//тест форма
+ 					$().w2destroy('mts_form');
 					// that.meteotrekGetData('stationsget_20')					// дані з сервера
 					// 	.then((res) => {
 					// 		that.stationsGet = res;
@@ -127,17 +129,27 @@ mapLandMeteotrek.prototype.initPane = function() {
 					// 		that.initStations();
 					// 	});
 					that.initStations();									// локальні дані
+
+					$('#mts').bind('resize', function() {
+						w2ui['stations_grid'].resize();
+					});
 					break;
 				case 'sensorslibget':
 					if (w2ui.hasOwnProperty('description_grid')) { break; }
 
+					$('#mts').unbind('resize');
 					$().w2destroy('stations_grid');
-					$().w2destroy('mts_form'); $('#test_form').remove();						//тест форма
+					$().w2destroy('mts_form');
 					that.initDescription();
+
+					$('#mts').bind('resize', function() {
+						w2ui['description_grid'].resize();
+					});
 					break;
 				case 'testForm':
-					if (w2ui.hasOwnProperty('mts_form') && $('#test_form').length) { break; }
+					if (w2ui.hasOwnProperty('mts_form')) { break; }
 
+					$('#mts').unbind('resize');
 					$().w2destroy('stations_grid');
 					$().w2destroy('description_grid');
 					$().w2destroy('stations_grid');
@@ -147,6 +159,10 @@ mapLandMeteotrek.prototype.initPane = function() {
 					// 	})
 					// 	.then(() => that.initTestForm());
 					that.initTestForm();
+
+					$('#mts').bind('resize', function() {
+						w2ui['mts_form'].resize();
+					});
 					break;
 				default:
 					w2alert('Шеф, все пропало!');

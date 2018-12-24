@@ -18,8 +18,7 @@ mapLandMeteotrek.prototype.initStations = function() {
 		name: 'stations_grid',
 		show: { 
 			toolbar: true,
-			footer: true,
-			selectColumn: true
+			footer: true
 		},
 		columns: [
 			{ field: 'recid', caption: 'ID', size: '5%' },
