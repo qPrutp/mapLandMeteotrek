@@ -100,8 +100,6 @@ mapLandMeteotrek.prototype.initPane = function() {
 				'</div>';
 	$('#dvMap').append(div);
 	$('#mts')
-			// .width(630)
-			// .height(400)
 			.resizable({handles:"e,s",minWidth:630,minHeight:400,containment:"#dvMap"})
 			.draggable({containment: 'parent',handle:'#mts_header'})
 			.hide();
