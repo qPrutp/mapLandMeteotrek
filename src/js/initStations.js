@@ -88,10 +88,10 @@ mapLandMeteotrek.prototype.initStations = function() {
 							'<div id="info_sensors_tabs"></div>'+
 							'<div id="info_sensors_main" class="d-flex_column d-flex_h100"></div>'+
 						'</div>';
-			$('body').append(div);
+			$('#dvMap').append(div);
 
 			$('#info_sensors_block')
-				.width(350)
+				.width(400)
 				.height(450)
 				.draggable({containment: 'parent',handle:'#info_sensors_header'})
 				.css('position','absolute')
@@ -175,7 +175,7 @@ mapLandMeteotrek.prototype.initStations = function() {
 				},
 				columns: [
 					{ field: 'recid', caption: 'ID', size: '5%' },
-					{ field: 'Cname', caption: locale['Sens name'], size: '20%' },
+					{ field: 'Cname', caption: locale['Sens name'], size: '25%' },
 					{ field: 'LastValue', caption: locale['Sens value'], size: '20%' },
 					{ field: 'Unit', caption: locale['Sens unit'], size: '15%' },
 					{ field: 'ParamDesc', caption: locale['Sens description'], size: '20%' },
@@ -197,7 +197,19 @@ mapLandMeteotrek.prototype.initStations = function() {
 	};
 
 	function showSensorsSlider(event) {
-		var data = that.stationsGet.find(item => item.ID == event.recid).Sensors;
+		var dataSensors = that.stationsGet.find(function(item) {
+			return item.ID == event.recid;
+		}).Sensors;
+
+		var data = [];
+		// відкидаємо штроту та довготу для слайдера
+		dataSensors.map(function(item) {
+			if(item.ParamDesc === 'Lattitude' || item.ParamDesc === 'Longitude') {
+				return;
+			} else {
+				data.push(item);
+			}
+		});
 
 		var div =	'<div class="sensors__inf-'+ event.box_id+'">'+
 						'<div class="sl-'+ event.box_id+'">';

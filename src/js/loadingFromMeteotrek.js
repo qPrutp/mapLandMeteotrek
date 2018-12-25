@@ -4,6 +4,8 @@ mapLandMeteotrek.prototype.meteotrekGetData = function (serviceName, dataget) {
 	// meteotrek.com получение данных
 	var SERVICE_URL = 'https://api.meteotrek.com/api/';
 	// - Временные данные для соединения с сервером --------------------------------------
+	var PASS = '';		//
+	var LOGIN = '';															//
 	// -----------------------------------------------------------------------------------
 	var send_data = '';
 	var dataget = dataget || false;

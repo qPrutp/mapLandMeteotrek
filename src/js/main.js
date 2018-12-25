@@ -62,7 +62,7 @@ mapLandMeteotrek.prototype.button = function(map) {
 	
 	$('#panel_button_mts').on('click', function() {
 		$('#panel_button_mts').toggleClass('control-button-active');
-		$('#mts').toggle(200);
+		$('#mts').toggle();
 		if ($('#panel_button_mts').hasClass('control-button-active')) {
 			that.meteotrekGetData('sensorslibget_20')				// дані з сервера
 				.then((res) => {
@@ -77,7 +77,7 @@ mapLandMeteotrek.prototype.button = function(map) {
 
 	$('#mts_header .panel-info-close').on('click', function(){
 		$('#panel_button_mts').toggleClass('control-button-active');
-		$('#mts').toggle(200);
+		$('#mts').toggle();
 	});
 };
 
@@ -98,7 +98,7 @@ mapLandMeteotrek.prototype.initPane = function() {
 						'</div>'+
 					'</div>'+
 				'</div>';
-	$('body').append(div);
+	$('#dvMap').append(div);
 	$('#mts')
 			.resizable({handles:"e,s",minWidth:630,minHeight:62,containment:"#dvMap"})
 			.draggable({containment: 'parent',handle:'#mts_header'})
@@ -109,8 +109,8 @@ mapLandMeteotrek.prototype.initPane = function() {
 		name: 'mts_tabs',
 		tabs: [
 			{ id: 'stationsget', text: this.locale['Stations'] },
-			{ id: 'sensorslibget', text: this.locale['Description'] },
-			{ id: 'testForm', text: this.locale['For period'] }
+			{ id: 'testForm', text: this.locale['For period'] },
+			{ id: 'sensorslibget', text: this.locale['Description'] }
 		],
 		onClick: function(event) {
 			switch(event.target) {
