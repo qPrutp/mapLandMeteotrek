@@ -2,6 +2,8 @@
 mapLandMeteotrek.prototype.initDescription = function() {
 	var that = this;
 	var locale = this.locale;
+	var grid = 'description_grid';
+
 	if(that.sensorsLibGet === undefined) {
 		w2alert(locale['Server error, data can not be obtained']);
 		if($('#error500').length) return;
@@ -15,8 +17,8 @@ mapLandMeteotrek.prototype.initDescription = function() {
 	}
 	
 	$('#mts_main-content').w2grid({
-			name: 'description_grid',
-			show: { 
+			name: grid,
+			show: {
 				toolbar: true,
 				footer: true,
 				lineNumbers : true
@@ -44,6 +46,8 @@ mapLandMeteotrek.prototype.initDescription = function() {
 		});
 		addRows(that.sensorsLibGet);
 
+		that.CreateSearchPanel(grid);
+
 	function addRows(data) {
 		var arr = [];
 		for (var i = 0; i < data.sensorNum; i++) {
@@ -51,4 +55,41 @@ mapLandMeteotrek.prototype.initDescription = function() {
 		}
 		w2ui['description_grid'].add(arr);
 	};
+};
+
+mapLandMeteotrek.prototype.CreateSearchPanel = function(objType) {
+	console.log(objType);
+	var grid = objType;
+	var searchBarHtml = '';
+
+	if (w2ui[grid]) {
+		if (w2ui[grid].show.lineNumbers === true)
+            searchBarHtml = '<td class="w2ui-col-number"></td>';
+
+        w2ui[grid].columns.forEach(function (column) {
+        	if (!column.hidden) {
+                var columnHtml = '';
+
+                if (column.field == 'GI_LINK_MAP') {
+                    columnHtml = '<div class="filter" title="test"></div>'
+                } else {
+                    var inputClass = column.dbtype ? 'class="' + column.dbtype.toLowerCase() + '" ' : '';
+                    columnHtml = '<div onclick="MeteotrekMap.ShowSearchConditions(\'' + grid + '\',\'' + column.field + '\')" class="condition">=</div>'
+                        + '<div class="input"><input type="text" name="' + column.field + '" ' + inputClass + 'maxlength="100" /></div>';
+                }
+
+                searchBarHtml += '<td id="mts' + grid + '_' + column.field + '" class="w2ui-col-search">' + columnHtml + '</td>';
+            }
+        });
+	}
+
+	searchBarHtml += '<td class="w2ui-col-search"></td>';
+
+    $('#mts' + grid + 'SearchBar').remove();
+    $('#grid_' + grid + '_columns > table > tbody').append('<tr id="mts' + grid + 'SearchBar" class="w2ui-grid-search">' + searchBarHtml + '</tr>');
+
+};
+
+mapLandMeteotrek.prototype.ShowSearchConditions = function() {
+	console.log('ShowSearchConditions');
 };
