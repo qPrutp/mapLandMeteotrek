@@ -33,7 +33,7 @@
 	padding: 3px;
 	border-radius: 4px;
 	left: 45px;
-	top: 143px;
+	top: 44px;
 	width: 630px;
 	height: 400px;
 }
@@ -53,6 +53,8 @@
 
 /* забираэмо баг з появою скролу головного вінка при переміщенні дочірнього */
 #info_sensors_block {
+	top: 0;
+	right: 0;
 	margin-right: 9px;
 	padding: 3px;
 }
@@ -117,14 +119,17 @@ div[class^='sensor__main_'], .mts__main {background-color: #efefef; }
 
 /* спроба пофіксити дрижання вікна при появі бокового скролу головного вікна, інколи баг проявляється... */
 #chart {
-	/* Firefox */
-	width: -moz-calc(100% - 0px);
-	/* WebKit */
-	width: -webkit-calc(100% - 0px);
-	/* Opera */
-	width: -o-calc(100% - 0px);
-	/* Standard */
-	width: calc(100% - 0px);
+	width: 100%;
+	border-radius: inherit;
+	bottom: 0;
+}
+
+.chart__header {
+	height: 13px;
+}
+
+.chart__main {
+	height: 300px;
 }
 
 /* діаграма прижимається вниз */

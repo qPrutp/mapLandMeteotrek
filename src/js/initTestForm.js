@@ -13,7 +13,6 @@ mapLandMeteotrek.prototype.initTestForm = function() {
 			$('#mts_main-content').removeClass('d-flex_column');
 		}
 	}
-	console.log('initTestForm: ',that.stationsGet);
 
 	// формуємо максимальну дату для датапікера
 	var now = new Date();
@@ -271,18 +270,19 @@ mapLandMeteotrek.prototype.initTestForm = function() {
 							'<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 10.586L8.707 7.293a1 1 0 0 0-1.414 1.414L10.586 12l-3.293 3.293a1 1 0 0 0 1.414 1.414L12 13.414l3.293 3.293a1 1 0 0 0 1.414-1.414L13.414 12l3.293-3.293a1 1 0 1 0-1.414-1.414L12 10.586z"></path></svg>'+
 						'</span>'+
 					'</div>'+
-					'<div id="chart_main_'+sid+'" class="chart__main_'+sid+' d-flex_h100">'+
+					'<div id="chart_main_'+sid+'" class="chart__main_'+sid+' d-flex_h100 chart__main">'+
 						'<canvas id="show_chart_'+sid+'" style="width: 100%; height: 300px;"></canvas>'+
 					'</div>'+
 				'</div>';
-		$('body').append(div);
+		$('#dvMap').append(div);
 
 		$('#chart')
-			.height(350)
+			// .height(350)
 			.draggable({containment: 'parent',handle:'#chart_header_'+sid})
 			.css('position','absolute')
 			.css('font-family','Verdana,Arial,sans-serif')
 			.css('font-size','11px');
+
 
 		$('#chart .panel-info-close').on('click', function(){
 			$('#chart').remove();

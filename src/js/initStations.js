@@ -13,14 +13,12 @@ mapLandMeteotrek.prototype.initStations = function() {
 			$('#mts_main-content').removeClass('d-flex_column');
 		}
 	}
-	console.log('initStations: ',that.stationsGet);
 
 	$('#mts_main-content').w2grid({
 		name: 'stations_grid',
 		show: { 
 			toolbar: true,
-			footer: true,
-			selectColumn: true
+			footer: true
 		},
 		columns: [
 			{ field: 'recid', caption: 'ID', size: '5%' },
@@ -33,7 +31,7 @@ mapLandMeteotrek.prototype.initStations = function() {
 		onExpand: function (event) {
 			showSensorsSlider(event);			
 		},
-		onClick: function (event) {
+		onDblClick: function (event) {
 			// перевірка який таб активний, якщо той що ми нажали ретурн
 			var tab = '';
 			if (w2ui.hasOwnProperty('info_tabs')) {
@@ -45,7 +43,6 @@ mapLandMeteotrek.prototype.initStations = function() {
 			showInfSensors(event);
 		},
 		onReload: function(event) {
-			console.log(event);
 			w2ui['stations_grid'].clear();
 			that.meteotrekGetData('stationsget_20')
 				.then(function(res) {
@@ -78,7 +75,6 @@ mapLandMeteotrek.prototype.initStations = function() {
 	};
 
 	function showInfSensors(event, infoList) {
-		console.log(event);
 		// перевіряємо чи сторінка сформована
 		if(!$('#info_sensors_block').length) {
 			// формуємо головне вікно з заголовком, блоком для табів та блоком для гріда який потрібно показувати
@@ -92,10 +88,10 @@ mapLandMeteotrek.prototype.initStations = function() {
 							'<div id="info_sensors_tabs"></div>'+
 							'<div id="info_sensors_main" class="d-flex_column d-flex_h100"></div>'+
 						'</div>';
-			$('body').append(div);
+			$('#dvMap').append(div);
 
 			$('#info_sensors_block')
-				.width(350)
+				.width(400)
 				.height(450)
 				.draggable({containment: 'parent',handle:'#info_sensors_header'})
 				.css('position','absolute')
@@ -112,13 +108,14 @@ mapLandMeteotrek.prototype.initStations = function() {
 
 		// знаходимо потрібний нам об'єкт з даними 
 		var data = findSensors(that.stationsGet, event.recid);
-		console.log(data);
 
 		// перевіряємо чи сформований блок для табів
 		if (w2ui.hasOwnProperty('info_tabs')) {
+
 			// перевіряємо чи таб створено
 			addTab(data);
 			// w2ui['info_tabs'].scroll('right');
+
 		} else {
 			// створюємо табс
 			$('#info_sensors_tabs').w2tabs({
@@ -128,7 +125,6 @@ mapLandMeteotrek.prototype.initStations = function() {
 					{ id: 'info_tab'+data[0].ID, text: data[0].StationName, closable: true }
 				],
 				onClose: function(event) {
-					console.log(event);
 					if(w2ui.hasOwnProperty('grid_info_tab')) $().w2destroy('grid_info_tab');
 					if(w2ui['info_tabs'].tabs.length === 1) {
 						$().w2destroy('info_tabs');
@@ -159,6 +155,11 @@ mapLandMeteotrek.prototype.initStations = function() {
 			w2ui['info_tabs'].refresh();
 			if(w2ui.hasOwnProperty('grid_info_tab')) $().w2destroy('grid_info_tab');
 			renderGrid(data);
+
+			// якщо к-ть табів переищує 3 ми видаляємо таб з 0 індексом в масиві w2ui.info_tabs.tabs
+			if (w2ui.info_tabs.tabs.length > 3) {
+				w2ui.info_tabs.remove(w2ui.info_tabs.tabs[0].id);
+			}
 		};
 		function findSensors(arr, id) {
 			return arr.filter(function(item, i, arr) {
@@ -174,7 +175,7 @@ mapLandMeteotrek.prototype.initStations = function() {
 				},
 				columns: [
 					{ field: 'recid', caption: 'ID', size: '5%' },
-					{ field: 'Cname', caption: locale['Sens name'], size: '20%' },
+					{ field: 'Cname', caption: locale['Sens name'], size: '25%' },
 					{ field: 'LastValue', caption: locale['Sens value'], size: '20%' },
 					{ field: 'Unit', caption: locale['Sens unit'], size: '15%' },
 					{ field: 'ParamDesc', caption: locale['Sens description'], size: '20%' },
@@ -196,7 +197,19 @@ mapLandMeteotrek.prototype.initStations = function() {
 	};
 
 	function showSensorsSlider(event) {
-		var data = that.stationsGet.find(item => item.ID == event.recid).Sensors;
+		var dataSensors = that.stationsGet.find(function(item) {
+			return item.ID == event.recid;
+		}).Sensors;
+
+		var data = [];
+		// відкидаємо штроту та довготу для слайдера
+		dataSensors.map(function(item) {
+			if(item.ParamDesc === 'Lattitude' || item.ParamDesc === 'Longitude') {
+				return;
+			} else {
+				data.push(item);
+			}
+		});
 
 		var div =	'<div class="sensors__inf-'+ event.box_id+'">'+
 						'<div class="sl-'+ event.box_id+'">';

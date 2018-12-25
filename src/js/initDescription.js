@@ -13,14 +13,13 @@ mapLandMeteotrek.prototype.initDescription = function() {
 			$('#mts_main-content').removeClass('d-flex_column');
 		}
 	}
-	console.log('initDescription: ',that.sensorsLibGet);
+	
 	$('#mts_main-content').w2grid({
 			name: 'description_grid',
 			show: { 
 				toolbar: true,
 				footer: true,
-				lineNumbers : true,
-				selectColumn: true
+				lineNumbers : true
 			},
 			multiSearch: false,
 			columns: [
