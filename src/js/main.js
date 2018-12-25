@@ -68,7 +68,7 @@ mapLandMeteotrek.prototype.button = function(map) {
 				.then((res) => {
 					that.sensorsLibGet = res[0];
 				})
-				.then(() => w2ui.mts_tabs.click('testForm'));
+				.then(() => w2ui.mts_tabs.click('stationsget'));
 			// w2ui.mts_tabs.click('testForm');
 		} else {
 			
@@ -83,7 +83,7 @@ mapLandMeteotrek.prototype.button = function(map) {
 
 // Создание главного окна приложения для отображения основных данных
 mapLandMeteotrek.prototype.initPane = function() {
-	var div = '<div id="mts" class="mts d-flex_column map-panel-def">'+
+	var div = '<div id="mts" class="map-panel-def mts d-flex_column" style="display: flex;">'+
 					'<div id="mts_header" class="mts__header">'+
 						this.locale['The information from']+
 						this.locale['donor']+
@@ -100,7 +100,9 @@ mapLandMeteotrek.prototype.initPane = function() {
 				'</div>';
 	$('#dvMap').append(div);
 	$('#mts')
-			.resizable({handles:"e,s",minWidth:630,minHeight:62,containment:"#dvMap"})
+			// .width(630)
+			// .height(400)
+			.resizable({handles:"e,s",minWidth:630,minHeight:400,containment:"#dvMap"})
 			.draggable({containment: 'parent',handle:'#mts_header'})
 			.hide();
 
