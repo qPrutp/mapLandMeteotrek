@@ -7,7 +7,11 @@
 	require_once MTSROOT."mapLandMeteotrek/src/app.php";
 
 
-// з наступної стрічки після link href="gwsse.css" rel="stylesheet"
+// з наступної стрічки після
+```html
+<link href="gwsse.css" rel="stylesheet" />
+<!-- Подключение "Meteotrek" -->
 	<?php mtsHeaders(); ?>
+```
 
 // php підключення додатку потрібно для відслідковування авторизації
