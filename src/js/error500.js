@@ -1,4 +1,4 @@
-mapLandMeteotrek.prototype.error500 = function(parent) {
+Meteotrek.prototype.error500 = function(parent) {
 	var locale = this.locale;
 	var div = '<div id="error500" class="error500 d-flex_h100 d-flex_column error">'+
 				'<div style="text-align: center;">'+

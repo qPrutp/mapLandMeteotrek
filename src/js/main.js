@@ -8,22 +8,26 @@ var MeteotrekMap = void(0);
 
 $(function() {
 	$(function() {
-		MeteotrekMap = new mapLandMeteotrek();
+		MeteotrekMap = new Meteotrek();
 	});
 });
 
-function mapLandMeteotrek() {
+function Meteotrek() {
+	// meteotrek.com получение данных
+	this.serviceUrl = 'https://api.meteotrek.com/api/';
+	this.summarySearchConditions = null;
+
 	this.sensorsLibGet = {};
 	this.stationsGet = {};
 	this.dataGet = {};
 //////////////////////// локальна заготовка даних з більш ніж 10 станції
 	this.stationsGet = JSON.parse($.ajax({
 			dataType: "json",
-			url: 'mapLandMeteotrek/data/list.json',
+			url: 'meteotrek/data/list.json',
 			async:false,
 			error:function(e){
 				if(e.status == 404){
-					w2alert('mapLandMeteotrek/data/list.json');
+					w2alert('meteotrek/data/list.json');
 				}
 			}
 		}).responseText);
@@ -31,11 +35,11 @@ function mapLandMeteotrek() {
 /////////////////////////
 	this.locale = JSON.parse($.ajax({
 			dataType: "json",
-			url: 'mapLandMeteotrek/locale/'+theMap.options.locale+'.json',
+			url: 'meteotrek/locale/'+theMap.options.locale+'.json',
 			async:false,
 			error:function(e){
 				if(e.status == 404){
-					w2alert('Не знайдено mapLandMeteotrek/locale/'+theMap.options.locale+'.json');
+					w2alert('Не знайдено meteotrek/locale/'+theMap.options.locale+'.json');
 				}
 			}
 		}).responseText);
@@ -44,7 +48,7 @@ function mapLandMeteotrek() {
 	this.initEvents();
 };
 
-mapLandMeteotrek.prototype.initEvents = function() {
+Meteotrek.prototype.initEvents = function() {
 	$('#dvProj').on('mapopened', function(e) {
 		if (typeof MeteotrekMap !== 'undefined') {
 			MeteotrekMap.button(e.map);
@@ -53,7 +57,7 @@ mapLandMeteotrek.prototype.initEvents = function() {
 };
 
 // створення кнопки на панелі користувача
-mapLandMeteotrek.prototype.button = function(map) {
+Meteotrek.prototype.button = function(map) {
 	var theMap = map;
 	var that = this;
 	$('#dvMap .controls-panel > .toolbar-panel')
@@ -82,7 +86,7 @@ mapLandMeteotrek.prototype.button = function(map) {
 };
 
 // Создание главного окна приложения для отображения основных данных
-mapLandMeteotrek.prototype.initPane = function() {
+Meteotrek.prototype.initPane = function() {
 	var div = '<div id="mts" class="map-panel-def mts d-flex_column" style="display: flex;">'+
 					'<div id="mts_header" class="mts__header">'+
 						this.locale['The information from']+
