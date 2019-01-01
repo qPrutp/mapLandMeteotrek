@@ -1,5 +1,5 @@
 
-mapLandMeteotrek.prototype.initTestForm = function() {
+Meteotrek.prototype.initTestForm = function() {
 	var that = this;
 	var locale = this.locale;
 	if(that.stationsGet === undefined) {

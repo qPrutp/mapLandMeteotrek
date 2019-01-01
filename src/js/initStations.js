@@ -1,5 +1,5 @@
 
-mapLandMeteotrek.prototype.initStations = function() {
+Meteotrek.prototype.initStations = function() {
 	var that = this;
 	var locale = this.locale;
 	if(that.stationsGet === undefined) {
@@ -217,7 +217,7 @@ mapLandMeteotrek.prototype.initStations = function() {
 		div += data.map(item => {
 							var i = item.Unit.length > 3 ? 'sl__long_text' : '';
 							return '<div class="sl__item" title="'+that.locale[item.ParamDesc]+
-								'"><img src="mapLandMeteotrek/src/img/'+ICONS[item.ParamDesc]+
+								'"><img src="meteotrek/src/img/'+ICONS[item.ParamDesc]+
 								'.png" class="sl__img"><span class="sl__text '+i+'">'+item.LastValue+
 								' '+item.Unit+'</span></div>'
 						});	

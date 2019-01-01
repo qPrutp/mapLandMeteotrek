@@ -1,5 +1,5 @@
 
-mapLandMeteotrek.prototype.initDescription = function() {
+Meteotrek.prototype.initDescription = function() {
 	var that = this;
 	var locale = this.locale;
 	var grid = 'description_grid';
@@ -57,8 +57,7 @@ mapLandMeteotrek.prototype.initDescription = function() {
 	};
 };
 
-mapLandMeteotrek.prototype.CreateSearchPanel = function(objType) {
-	console.log(objType);
+Meteotrek.prototype.CreateSearchPanel = function(objType) {
 	var grid = objType;
 	var searchBarHtml = '';
 
@@ -90,6 +89,15 @@ mapLandMeteotrek.prototype.CreateSearchPanel = function(objType) {
 
 };
 
-mapLandMeteotrek.prototype.ShowSearchConditions = function() {
+Meteotrek.prototype.ShowSearchConditions = function(objType, field) {
 	console.log('ShowSearchConditions');
+	$('#mts' + objType + '_' + field + ' .condition').w2overlay({
+		html: this.summarySearchConditions,
+		onShow: function () {
+			$('#mtsSearchConditions').data('type', objType);
+			$('#mtsSearchConditions').data('field', field);
+			$('#mtsSearchConditions li').removeClass('current');
+			$('#mtsSearchConditions li[data-id=' + $('#mts' + objType + '_' + field + ' .condition').data('id') + ']').addClass('current');
+		}
+	});
 };
