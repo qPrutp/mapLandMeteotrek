@@ -21,17 +21,17 @@ function Meteotrek() {
 	this.stationsGet = {};
 	this.dataGet = {};
 //////////////////////// локальна заготовка даних з більш ніж 10 станції
-	this.stationsGet = JSON.parse($.ajax({
-			dataType: "json",
-			url: 'meteotrek/data/list.json',
-			async:false,
-			error:function(e){
-				if(e.status == 404){
-					w2alert('meteotrek/data/list.json');
-				}
-			}
-		}).responseText);
-	this.stationsGet = this.stationsGet.res;
+	// this.stationsGet = JSON.parse($.ajax({
+	// 		dataType: "json",
+	// 		url: 'meteotrek/data/list.json',
+	// 		async:false,
+	// 		error:function(e){
+	// 			if(e.status == 404){
+	// 				w2alert('meteotrek/data/list.json');
+	// 			}
+	// 		}
+	// 	}).responseText);
+	// this.stationsGet = this.stationsGet.res;
 /////////////////////////
 	this.locale = JSON.parse($.ajax({
 			dataType: "json",
@@ -125,14 +125,14 @@ Meteotrek.prototype.initPane = function() {
 					$('#mts').unbind('resize');
  					$().w2destroy('description_grid');
  					$().w2destroy('mts_form');
-					// that.meteotrekGetData('stationsget_20')					// дані з сервера
-					// 	.then((res) => {
-					// 		that.stationsGet = res;
-					// 	})
-					// 	.then(() => {
-					// 		that.initStations();
-					// 	});
-					that.initStations();									// локальні дані
+					that.meteotrekGetData('stationsget_20')					// дані з сервера
+						.then((res) => {
+							that.stationsGet = res;
+						})
+						.then(() => {
+							that.initStations();
+						});
+					// that.initStations();									// локальні дані
 
 					$('#mts').bind('resize', function() {
 						w2ui['stations_grid'].resize();
