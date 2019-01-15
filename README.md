@@ -4,6 +4,7 @@
 	define('MTSROOT', realpath(dirname(__FILE__)).DIRECTORY_SEPARATOR);
 	require_once MTSROOT."meteotrek/src/app.php";
 
+
 // з наступної стрічки після <link href="gwsse.css" rel="stylesheet" /> додати:
 ```html
 	<!-- Подключение "Meteotrek" -->
