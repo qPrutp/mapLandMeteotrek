@@ -2,8 +2,8 @@
 
 Meteotrek.prototype.meteotrekGetData = function (serviceName, dataget) {
 	// - Временные данные для соединения с сервером --------------------------------------
-	var PASS = 'DBDD3E9B819FF76A48085AFF85B0B0988273AF0DA54E20CB1BB0930329FFC0E1';		//
-	var LOGIN = 'globalgis';															//
+	var PASS = '';		//
+	var LOGIN = '';															//
 	// -----------------------------------------------------------------------------------
 	var send_data = '';
 	var dataget = dataget || false;
