@@ -31,7 +31,7 @@
 	"Time Range":"Часовий діапазон",
 	"Sensor list":"Список сенсорів",
 	"Reset":"Очистити",
-	"Send":"Відправити",
+	"Send":"Отримати",
 	"Description the sensor":"Опис датчика",
 	"ID the sensor":"Номер датчика",
 	"St number":"Номер",
@@ -44,5 +44,6 @@
 	"Sens value":"Значення",
 	"Sens unit":"Одиниці вимірювання",
 	"Sens description":"Опис",
-	"Sens indicator":"Помилка"
+	"Sens indicator":"Помилка",
+	"Show on the map":"Показати на карті"
 }
