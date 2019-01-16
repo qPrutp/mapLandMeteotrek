@@ -22,6 +22,7 @@ Meteotrek.prototype.initStations = function() {
 		},
 		columns: [
 			{ field: 'recid', caption: 'ID', size: '5%' },
+			{ field: 'map', size: '5%' },
 			{ field: 'StationNumber', caption: locale['St number'], size: '21%' },
 			{ field: 'StationName', caption: locale['St name'], size: '12%' },
 			{ field: 'Description', caption: locale['St description'], size: '16%' },
@@ -66,13 +67,21 @@ Meteotrek.prototype.initStations = function() {
 		}
 		var arr = [];
 		for (var i = 0; i < data.length; i++) {
-			arr.push({	recid: (+data[i].ID), StationNumber: (+data[i].StationNumber),
+			var btnSearch = '<span class="btn_show-on-map panel-info-img-search" data="'+data[i].ID+'"'+
+								'title="'+locale['Show on the map']+'">'+
+							'</span>';
+			arr.push({	recid: (+data[i].ID), map: btnSearch, StationNumber: (+data[i].StationNumber),
 						Description: data[i].Description, StationName: data[i].StationName,
 						LastData: data[i].LastData, FirstData: data[i].FirstData
 					});
 		}
 		w2ui['stations_grid'].add(arr);
 	};
+
+	// навішуємо слухач на кнопку (іконку) показати на карті метеостанцію
+	$('.btn_show-on-map').on('click', function(e) {
+		console.log($(this).attr('data'));
+	})
 
 	function showInfSensors(event, infoList) {
 		// перевіряємо чи сторінка сформована

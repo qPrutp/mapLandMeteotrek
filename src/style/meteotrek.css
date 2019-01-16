@@ -199,3 +199,17 @@ canvas[id^='show_chart_'] {
 .mts__main-content .w2ui-col-search .input input:focus {
     background-color: #ffffe1;
 }
+
+/* кнопка пошуку мереостанції на карті */
+.btn_show-on-map {
+	background-color: transparent;
+    background-position: center center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    display: inline-block;
+    height: 16px;
+    margin: 0 3px;
+    text-decoration: none;
+    width: 16px;
+	background-image: url("data:image/gif;base64,R0lGODlhEAAQAPfhACpXkidLfyZLgCpLfGF8oH2q5CxMeiRJf/T2+TNoqfX2+ShCa+3EFj9zqevEF9CwMixdm/TTJS5Gb9SxPfn6++TFLElnfEdhfff4+efFJVZtmOzBJYeMf66UQCZCbqK20r6tWPTQGnNqYVtwmLqsXO+/JkVTZd66IfK3HsKaLEl9uGig4EF6vDFelzhztk90o4aBXDE/Xxw7bOG/KsSmSImHbIqJbYKGbsfO2s+zUdm0JMqiJ1iR0jNQeOmcH9eoFfrKGG95hd2uGHOAhqadXlGKyJSfg32Pr/j27+yvG/j05NG+QMajOO2OGpOZfbueQYa9/aOlmJKVcZ+XZbqkReXHLcrP1S9HcStgnWt4fCZGd/vOGO6wGxpEg3Kq7vHisDVEX3Kn5PDAIODESmJocTxMZPbUHPv7/ExjjzdXitSxLypWkSVamiI8ZURZfmGa2j1fknp5eeLm7/jDHCNSk0NVY+C4Ji9fmkWBwzJmpi1fnfLOJktSYDZzt+zJJe3JIDdwsa2TRuXBJNi3P+/r5vnTF351T8SeMufu9964J4+EXeW4MsHJ2PnPHPL0+FBpiCJHg9ytFmF7jzVvsKq0xMLO4OOgGOe2IsCqPZiUcIi071FlgLSYWKawxc3CrqCy0F5re+e6HOK0FtG4OSdQiJmmnNHKwZ6TVUuGyvTDH0V7xO/MGlp5oXt8clBvlWF7odGxNe++IfTUIreoWbzE0yhPhYGw3++SHva7H8a3UP/aEMHAuLKwrMupNlqR1mONxKGwqZSdqWVnVsrQ28K0Y/rWHcDExEOBwrWWOiRUlIWMeamkX+C5LLecPVtuh1+V142FcKGQVm+GrSZMgkuP7PDNItGwOyVHecSsQIyTh0+Lz1aNyvPPG9DX5Flwh6W0zPG7I////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAOEALAAAAAAQABAAAAj/AMMJDNftkxs0I47sUjJwIIJOQWzUUITsgY4xVho6ChbokBBRkX4wqBbhFK2BlGDAepJix4kMsUoUmwGqUjgkIDhIGcSJySVwYlAA6UDGlZwvhazNErRoCxcft5rgSrQp2bcJ3FZhqtIsl5pQlpLMwfaIDqscf8xQGUVCEzAHRpxsGAKnR61sskKkWlYAiq0pvlTFkXShTBpnFfzYKeUlzIpf21S0yhINDLQPSxplovbmGQ9tx/p4E8EnBi9ExHQReVEEFR4WgPKwgWSil6dwxvbcUNbAxaQEWNZ0qcOMBqFwCqJYaHFHDwQApK7JEGbI1EAM0qYdEBBAi4c2CzQwEWoYjsKwVwOuSDBAAMeZgQEBADs=");
+}

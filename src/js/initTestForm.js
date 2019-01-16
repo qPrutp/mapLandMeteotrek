@@ -60,7 +60,7 @@ Meteotrek.prototype.initTestForm = function() {
 	div +=			'</div>'+
 					'<div class="w2ui-buttons">'+
 						'<button class="w2ui-btn mts__btn" name="reset">'+locale['Reset']+'</button>'+
-						'<button class="w2ui-btn mts__btn" name="send">'+locale['Send']+'</button>'+
+						'<button class="w2ui-btn mts__btn btn-green" name="send">'+locale['Send']+'</button>'+
 					'</div>'+
 				'</div>';
 	$('#mts_main-content').append(div);

@@ -68,12 +68,12 @@ Meteotrek.prototype.button = function(map) {
 		$('#panel_button_mts').toggleClass('control-button-active');
 		$('#mts').toggle();
 		if ($('#panel_button_mts').hasClass('control-button-active')) {
-			that.meteotrekGetData('sensorslibget_20')				// дані з сервера
-				.then((res) => {
-					that.sensorsLibGet = res[0];
-				})
-				.then(() => w2ui.mts_tabs.click('stationsget'));
-			// w2ui.mts_tabs.click('testForm');
+			// that.meteotrekGetData('sensorslibget_20')				// дані з сервера
+			// 	.then((res) => {
+			// 		that.sensorsLibGet = res[0];
+			// 	})
+			// 	.then(() => w2ui.mts_tabs.click('stationsget'));
+			w2ui.mts_tabs.click('stationsget');
 		} else {
 			
 		}
@@ -144,7 +144,14 @@ Meteotrek.prototype.initPane = function() {
 					$('#mts').unbind('resize');
 					$().w2destroy('stations_grid');
 					$().w2destroy('mts_form');
-					that.initDescription();
+
+					that.meteotrekGetData('sensorslibget_20')				// дані з сервера
+					.then((res) => {
+						that.sensorsLibGet = res[0];
+					})
+					.then(() => {
+						that.initDescription();
+					});
 
 					$('#mts').bind('resize', function() {
 						w2ui['description_grid'].resize();
